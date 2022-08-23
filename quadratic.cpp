@@ -8,7 +8,7 @@ double x2 = NAN;
 
 enum non_trivial_roots
 {   
-    all_num = -1, no_roots = 0
+    INF_ROOTS  = -1
 };
 
 struct quadratic_coeffs
@@ -33,9 +33,9 @@ int solve_quadratic(quadratic_coeffs *coeffs, double *x1, double *x2)
         {
             if (coeffs->c == 0)
             {
-                return all_num;
+                return INF_ROOTS;
             }
-            return no_roots;
+            return 0;
         }
         *x1 = (-coeffs->c / coeffs->b);
         return 1;
@@ -53,7 +53,7 @@ int solve_quadratic(quadratic_coeffs *coeffs, double *x1, double *x2)
             {
                 if (coeffs->a > 0)
                 {
-                    return no_roots;
+                    return 0;
                 }
                 else
                 { 
@@ -72,7 +72,7 @@ int solve_quadratic(quadratic_coeffs *coeffs, double *x1, double *x2)
                 }
                 else
                 {
-                    return no_roots;
+                    return 0;
                 }
             }    
         }
@@ -81,26 +81,26 @@ int solve_quadratic(quadratic_coeffs *coeffs, double *x1, double *x2)
             if (coeffs->c == 0)
             {
                 *x1 = 0;
-                *x2 = -coeffs->b /coeffs->a;
+                *x2 = -coeffs->b / coeffs->a;
                 return 2;
             }
             else
             {
-                double D = (coeffs->b*coeffs->b) - (4*coeffs->a*coeffs->c);
-                if (D > 0)
+                double discr = (coeffs->b * coeffs->b) - (4*coeffs->a*coeffs->c);
+                if (discr > 0)
                 {
-                    *x1 = (-coeffs->b + sqrt(D)) / (2*coeffs->a);
-                    *x2 = (-coeffs->b - sqrt(D)) / (2*coeffs->a);
+                    *x1 = (-coeffs->b + sqrt(discr)) / (2*coeffs->a);
+                    *x2 = (-coeffs->b - sqrt(discr)) / (2*coeffs->a);
                     return 2;
                 }   
-                else if (D == 0)
+                else if (discr == 0)
                 {
                     *x1 = -coeffs->b / 2 / coeffs->a;
                     return 1;
                 }
                 else
                 {
-                    return no_roots;
+                    return 0;
                 }
             }
         }
@@ -114,7 +114,7 @@ int main ()
     
     switch (solve_quadratic(&coeffs, &x1, &x2))
     {
-        case -1:
+        case INF_ROOTS:
             printf("Solution of this equation: all rational numbers")  ;
             break;
         case  0:
