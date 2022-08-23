@@ -86,7 +86,8 @@ int solve_quadratic(quadratic_coeffs *coeffs, double *x1, double *x2)
             }
             else
             {
-                double discr = (coeffs->b * coeffs->b) - (4*coeffs->a*coeffs->c);
+                double discr = (coeffs->b * coeffs->b)
+                         - (4 * coeffs->a * coeffs->c);
                 if (discr > 0)
                 {
                     *x1 = (-coeffs->b + sqrt(discr)) / (2*coeffs->a);
