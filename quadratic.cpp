@@ -18,6 +18,25 @@ struct quadratic_coeffs
     double c = NAN;
 };
 
+void read_coeffs(quadratic_coeffs *coeffs);
+
+int solve_linear(quadratic_coeffs *coeffs, double *x1);
+
+int solve_quadratic(quadratic_coeffs *coeffs, double *x1, double *x2);
+
+void give_answers (int n_roots);
+
+
+int main ()
+{
+    quadratic_coeffs coeffs = {};
+    read_coeffs(&coeffs);
+    give_answers(solve_quadratic(&coeffs, &x1, &x2));
+
+    
+    return 0;
+}
+
 void read_coeffs(quadratic_coeffs *coeffs)
 {
     printf("Enter coefficients of equation\n");
@@ -51,7 +70,6 @@ int solve_linear(quadratic_coeffs *coeffs, double *x1)
     }
 }
 
-
 int solve_quadratic(quadratic_coeffs *coeffs, double *x1, double *x2) 
 {
     if (coeffs->a == 0)
@@ -60,78 +78,37 @@ int solve_quadratic(quadratic_coeffs *coeffs, double *x1, double *x2)
     }
     else
     {
-        if (coeffs->b == 0)
+        if (coeffs->b == 0 && coeffs->c == 0)
         {
-            if (coeffs->c == 0)
-            {
-                *x1 = 0;
-                return 1;
-            }
-            else if (coeffs->c > 0)
-            {
-                if (coeffs->a > 0)
-                {
-                    return 0;
-                }
-                else
-                { 
-                    *x1 =  sqrt(-coeffs->c / coeffs->a);
-                    *x2 = -sqrt(-coeffs->c / coeffs->a);
-                    return 2;
-                }
-            }
-            else
-            { 
-                if (coeffs->a > 0)
-                {
-                        *x1 =  sqrt(-coeffs->c / coeffs->a);
-                        *x2 = -sqrt(-coeffs->c / coeffs->a);
-                        return 2;
-                }
-                else
-                {
-                    return 0;
-                }
-            }    
+            *x1 =  0;
+            return 1;
         }
         else
         {
-            if (coeffs->c == 0)
+            double discr = (coeffs->b * coeffs->b)
+                     - (4 * coeffs->a * coeffs->c);
+            if (discr > 0)
             {
-                *x1 = 0;
-                *x2 = -coeffs->b / coeffs->a;
+                *x1 = (-coeffs->b + sqrt(discr)) / (2*coeffs->a);
+                *x2 = (-coeffs->b - sqrt(discr)) / (2*coeffs->a);
                 return 2;
+            }   
+            else if (discr == 0)
+            {
+                *x1 = -coeffs->b / (2 * coeffs->a);
+                return 1;
             }
             else
             {
-                double discr = (coeffs->b * coeffs->b)
-                         - (4 * coeffs->a * coeffs->c);
-                if (discr > 0)
-                {
-                    *x1 = (-coeffs->b + sqrt(discr)) / (2*coeffs->a);
-                    *x2 = (-coeffs->b - sqrt(discr)) / (2*coeffs->a);
-                    return 2;
-                }   
-                else if (discr == 0)
-                {
-                    *x1 = -coeffs->b / 2 / coeffs->a;
-                    return 1;
-                }
-                else
-                {
-                    return 0;
-                }
+                return 0;
             }
         }
-    } 
+    }
 }
 
-int main ()
+void give_answers (int n_roots)
 {
-    quadratic_coeffs coeffs = {};
-    read_coeffs(&coeffs);
-    
-    switch (solve_quadratic(&coeffs, &x1, &x2))
+    switch (n_roots)
     {
     case INF_ROOTS:
                 printf("Solution of this equation: all rational numbers")  ;
@@ -142,12 +119,10 @@ int main ()
     case  1:
                 printf("Solution of this equation:\n %lf", x1);
                 break;
-    case 2:
+    case  2:
                 printf("Solutions of this equation:\n %lf, %lf", x1, x2);
                 break;
     default:
                 break;
     }
-    
-    return 0;
 }
