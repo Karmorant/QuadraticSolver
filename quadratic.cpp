@@ -1,31 +1,16 @@
+
 #include <stdio.h>
 #include <math.h>
 #include <cmath>
-#include <assert.h>
+#include <assert.h> 
+#include "quadratic_functions.h"
+#include "compare.h"
+
+
+
 
 double x1 = NAN;
 double x2 = NAN;
-
-enum non_trivial_roots
-{   
-    INF_ROOTS  = -1
-};
-
-struct quadratic_coeffs
-{
-    double a = NAN;
-    double b = NAN;
-    double c = NAN;
-};
-
-void read_coeffs(quadratic_coeffs *coeffs);
-
-int solve_linear(quadratic_coeffs *coeffs, double *x1);
-
-int solve_quadratic(quadratic_coeffs *coeffs, double *x1, double *x2);
-
-void give_answers (int n_roots);
-
 
 int main ()
 {
@@ -33,9 +18,25 @@ int main ()
     read_coeffs(&coeffs);
     give_answers(solve_quadratic(&coeffs, &x1, &x2));
 
-    
     return 0;
 }
+
+int is_equal   (double a, double b, const double threshold)
+{  
+    return fabs(a - b) <= threshold;
+} 
+
+int is_greater (double a, double b, const double threshold)
+{  
+    if (is_equal(a, b, threshold))
+    {
+        return false;
+    }
+    else
+    {
+        return a > b;
+    }
+} 
 
 void read_coeffs(quadratic_coeffs *coeffs)
 {
@@ -45,9 +46,9 @@ void read_coeffs(quadratic_coeffs *coeffs)
 
 int solve_linear(quadratic_coeffs *coeffs, double *x1)
 {
-    if (coeffs->b == 0)
+    if (is_equal(coeffs->b, 0, THRESHOLD))
     {
-        if (coeffs->c == 0)
+        if (is_equal(coeffs->c, 0, THRESHOLD))
         {
             return INF_ROOTS;
         }
@@ -58,7 +59,7 @@ int solve_linear(quadratic_coeffs *coeffs, double *x1)
     }
     else
     {
-        if (coeffs->c == 0)
+        if (is_equal(coeffs->c, 0, THRESHOLD))
         {
             return INF_ROOTS;
         }
@@ -72,13 +73,14 @@ int solve_linear(quadratic_coeffs *coeffs, double *x1)
 
 int solve_quadratic(quadratic_coeffs *coeffs, double *x1, double *x2) 
 {
-    if (coeffs->a == 0)
+    if (is_equal(coeffs->a, 0, THRESHOLD))
     {
          return solve_linear(coeffs, x1);
     }
     else
     {
-        if (coeffs->b == 0 && coeffs->c == 0)
+        if (    is_equal(coeffs->b, 0, THRESHOLD)
+             && is_equal(coeffs->c, 0, THRESHOLD))
         {
             *x1 =  0;
             return 1;
@@ -87,13 +89,14 @@ int solve_quadratic(quadratic_coeffs *coeffs, double *x1, double *x2)
         {
             double discr = (coeffs->b * coeffs->b)
                      - (4 * coeffs->a * coeffs->c);
-            if (discr > 0)
+
+            if (is_greater(discr, 0, THRESHOLD))
             {
                 *x1 = (-coeffs->b + sqrt(discr)) / (2*coeffs->a);
                 *x2 = (-coeffs->b - sqrt(discr)) / (2*coeffs->a);
                 return 2;
             }   
-            else if (discr == 0)
+            else if (is_equal(discr, 0, THRESHOLD))
             {
                 *x1 = -coeffs->b / (2 * coeffs->a);
                 return 1;
