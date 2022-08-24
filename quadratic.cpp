@@ -24,21 +24,39 @@ void read_coeffs(quadratic_coeffs *coeffs)
     scanf("%lf %lf %lf", &coeffs->a, &coeffs->b, &coeffs->c);
 }
 
+int solve_linear(quadratic_coeffs *coeffs, double *x1)
+{
+    if (coeffs->b == 0)
+    {
+        if (coeffs->c == 0)
+        {
+            return INF_ROOTS;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+    else
+    {
+        if (coeffs->c == 0)
+        {
+            return INF_ROOTS;
+        }
+        else
+        {
+           *x1 = (-coeffs->c / coeffs->b);
+            return 1;
+        }
+    }
+}
+
 
 int solve_quadratic(quadratic_coeffs *coeffs, double *x1, double *x2) 
 {
     if (coeffs->a == 0)
     {
-        if (coeffs->b == 0)
-        {
-            if (coeffs->c == 0)
-            {
-                return INF_ROOTS;
-            }
-            return 0;
-        }
-        *x1 = (-coeffs->c / coeffs->b);
-        return 1;
+         return solve_linear(coeffs, x1);
     }
     else
     {
@@ -115,20 +133,20 @@ int main ()
     
     switch (solve_quadratic(&coeffs, &x1, &x2))
     {
-        case INF_ROOTS:
-            printf("Solution of this equation: all rational numbers")  ;
-            break;
-        case  0:
-            printf("There is no solution for this equation"); 
-            break;
-        case  1:
-            printf("Solution of this equation:\n %lf", x1);
-            break;
-        case 2:
-            printf("Solutions of this equation:\n %lf, %lf", x1, x2);
-            break;
-        default:
-            break;
+    case INF_ROOTS:
+                printf("Solution of this equation: all rational numbers")  ;
+                break;
+    case  0:
+                printf("There is no solution for this equation"); 
+                break;
+    case  1:
+                printf("Solution of this equation:\n %lf", x1);
+                break;
+    case 2:
+                printf("Solutions of this equation:\n %lf, %lf", x1, x2);
+                break;
+    default:
+                break;
     }
     
     return 0;
