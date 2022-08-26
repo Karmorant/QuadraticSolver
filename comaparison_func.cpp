@@ -2,19 +2,19 @@
 #include <math.h>
 
 
-int is_equal   (double a, double b, const double threshold)
+int is_equal(const double a, const double d, const double threshold)
 {  
-    return fabs(a - b) <= threshold;
+    return fabs(a - d) <= threshold;
 } 
 
-int is_greater (double a, double b, const double threshold)
+int is_greater(const double a, const double d, const double threshold)
 {  
-    if (is_equal(a, b, threshold))
+    if (is_equal(a, d, threshold))
     {
         return false;
     }
     else
     {
-        return a > b;
+        return a > d;
     }
 } 

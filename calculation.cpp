@@ -6,9 +6,9 @@
 
 int solve_linear(quadratic_coeffs *coeffs, quadratic_roots *roots)
 {
-    if (is_equal(coeffs->b, 0, THRESHOLD))
+    if (is_equal(coeffs->b, 0))
     {
-        if (is_equal(coeffs->c, 0, THRESHOLD))
+        if (is_equal(coeffs->c, 0))
         {
             return INF_ROOTS;
         }
@@ -19,7 +19,7 @@ int solve_linear(quadratic_coeffs *coeffs, quadratic_roots *roots)
     }
     else
     {
-        if (is_equal(coeffs->c, 0, THRESHOLD))
+        if (is_equal(coeffs->c, 0))
         {
             return INF_ROOTS;
         }
@@ -33,14 +33,14 @@ int solve_linear(quadratic_coeffs *coeffs, quadratic_roots *roots)
 
 int solve_quadratic(quadratic_coeffs *coeffs, quadratic_roots *roots) 
 {
-    if (is_equal(coeffs->a, 0, THRESHOLD))
+    if (is_equal(coeffs->a, 0))
     {
          return solve_linear(coeffs, roots);
     }
     else
     {
-        if (    is_equal(coeffs->b, 0, THRESHOLD)
-             && is_equal(coeffs->c, 0, THRESHOLD))
+        if (    is_equal(coeffs->b, 0)
+             && is_equal(coeffs->c, 0))
         {
             roots->x1 =  0;
             return 1;
@@ -49,14 +49,15 @@ int solve_quadratic(quadratic_coeffs *coeffs, quadratic_roots *roots)
         {
             double discr = (coeffs->b * coeffs->b)
                      - (4 * coeffs->a * coeffs->c);
-
-            if (is_greater(discr, 0, THRESHOLD))
+            double sqrtd = sqrt(discr);
+            if (is_greater(discr, 0))
             {
-                roots->x1 = (-coeffs->b + sqrt(discr)) / (2*coeffs->a);
-                roots->x2 = (-coeffs->b - sqrt(discr)) / (2*coeffs->a);
+                // sqrt --> cache
+                roots->x1 = (-coeffs->b + sqrtd) / (2 * coeffs->a);
+                roots->x2 = (-coeffs->b - sqrtd) / (2 * coeffs->a);
                 return 2;
             }   
-            else if (is_equal(discr, 0, THRESHOLD))
+            else if (is_equal(discr, 0))
             {
                 roots->x1 = -coeffs->b / (2 * coeffs->a);
                 return 1;

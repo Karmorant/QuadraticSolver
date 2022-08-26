@@ -9,14 +9,14 @@ enum non_trivial_roots
     INF_ROOTS  = -1
 };
 
-struct quadratic_coeffs
+struct quadratic_coeffs //_t
 {
     double a = NAN;
     double b = NAN;
     double c = NAN;
 };
 
-struct quadratic_roots
+struct quadratic_roots //_t
 {
     double x1 = NAN;
     double x2 = NAN;
