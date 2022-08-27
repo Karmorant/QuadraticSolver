@@ -1,8 +1,21 @@
 #include <stdio.h>
-#include "quadratic_functions.h"
+#include <errno.h>
+#include <stdlib.h>
 
-void read_coeffs(quadratic_coeffs *coeffs)
+#include "UI_functions.h"
+#include "input.h"
+
+
+
+
+void read_coeffs (quadratic_coeffs *coeffs, char *buf)
 {
-    printf("Enter coefficients of equation\n");
-    scanf("%lf %lf %lf", &coeffs->a, &coeffs->b, &coeffs->c);
+    printf("\tEnter coefficients of equation\n");
+    write_buf (buf);
+    if((sscanf(buf,"%lf %lf %lf\n", &coeffs->a, &coeffs->b, &coeffs->c)) != 3)
+    {
+        printf("\tInvailed input. Numbers were expected. "
+               "Or not all coefficients are entered.\n");
+        read_coeffs(coeffs, buf);
+    }
 }

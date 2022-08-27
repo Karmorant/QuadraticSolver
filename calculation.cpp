@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <math.h>
+
 #include "compare.h"
 #include "quadratic_functions.h"
 
@@ -52,7 +53,6 @@ int solve_quadratic(quadratic_coeffs *coeffs, quadratic_roots *roots)
             double sqrtd = sqrt(discr);
             if (is_greater(discr, 0))
             {
-                // sqrt --> cache
                 roots->x1 = (-coeffs->b + sqrtd) / (2 * coeffs->a);
                 roots->x2 = (-coeffs->b - sqrtd) / (2 * coeffs->a);
                 return 2;

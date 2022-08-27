@@ -1,5 +1,7 @@
 #include <stdio.h>
-#include "quadratic_functions.h"
+
+#include "output.h"
+
 
 
 void give_answers (int n_roots, quadratic_roots *roots)
@@ -7,16 +9,16 @@ void give_answers (int n_roots, quadratic_roots *roots)
     switch (n_roots)
     {
     case INF_ROOTS:
-                printf("Solution of this equation: all rational numbers")  ;
+                printf("\tSolution of this equation: all rational numbers\n")  ;
                 break;
     case  0:
-                printf("There is no solution for this equation"); 
+                printf("\tThere is no solution for this equation\n"); 
                 break;
     case  1:
-                printf("Solution of this equation:\n %lf", roots->x1);
+                printf("\tSolution of this equation:\n %lf\n", roots->x1);
                 break;
     case  2:
-                printf("Solutions of this equation:\n %lf, %lf", roots->x1, roots->x2);
+                printf("\tSolutions of this equation:\n %lf, %lf\n", roots->x1, roots->x2);
                 break;
     default:
                 break;
