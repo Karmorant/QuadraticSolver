@@ -22,23 +22,32 @@ void show_menu()
     
 }
  
-void write_buf (char *buf)
+int write_buf (char *buf)
 {
-    int c = 0;
+    int  c = 0;
     clear(buf);
     for (int i = 0; (c = getchar()) != EOF && c != '\n'; i++)
     {
-        if (i >= MAXL)
+        printf("Again\n");
+        if (i >= MAXL - 1)
         {
             printf("OVERFLOW_ERROR. Please try again.\n");
-            clear(buf);
-            write_buf(buf);
+            while ((c = getchar()) != EOF && c != '\n')
+                ;
+            //clear(buf);
+            //write_buf(buf);
+            //buf[i + 1] = '\n';
+            return OVERFLOW_ERROR;
+            // while (wriete(buf) == OVERFLAW) 
+                //printf("overflaw")
         }
         else
         {
-        buf[i] = c;
+            buf[i] = (char) c;
+            printf("%s", buf);
         }
     }
+    return 1;
 }
 
 int compare(char *str1, const char *str2, const int size)

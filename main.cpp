@@ -25,7 +25,8 @@ int main()
     while (status != OPT_QUIT)
     {
         clear(buf);
-        write_buf(buf);
+        while(write_buf (buf) == OVERFLOW_ERROR)
+                ;
         switch (check_command(buf))
         {
         case INPUT_ERROR:

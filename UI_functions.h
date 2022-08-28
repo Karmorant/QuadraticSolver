@@ -37,7 +37,7 @@ enum operations
 
 void clear(char *buf);
 void show_menu();
-void write_buf (char *buf);
+int write_buf (char *buf);
 int  compare(char *str1, const char *str2, const int size);
 int  check_command(char *buf);
 void show_help();

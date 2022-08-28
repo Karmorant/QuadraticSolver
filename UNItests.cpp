@@ -47,7 +47,7 @@ void UNItests(quadratic_coeffs *coeffs, quadratic_roots *roots)
             }
             else if (!isnan(roots->x1) && isnan(roots->x2) && Test[i].uni_n_roots == 1)
             {
-                if (Test[i].x1 == roots->x1)
+                if (is_equal(Test[i].x1, roots->x1))
                 {
                     printf("TEST COMPLET\n\n");
                     j++;
@@ -62,9 +62,9 @@ void UNItests(quadratic_coeffs *coeffs, quadratic_roots *roots)
             }
             else if (!isnan(roots->x1) && !isnan(roots->x2) && Test[i].uni_n_roots == 2)
             {
-                if (Test[i].x1 == roots->x1 && Test[i].x2 == roots->x2)
+                if (is_equal(Test[i].x1, roots->x1) && is_equal(Test[i].x2, roots->x2))
                 {
-                    printf("TEST COMPLET\n");
+                    printf("TEST COMPLET\n\n");
                     j++;  
                 }
                 else

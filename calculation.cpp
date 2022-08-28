@@ -27,6 +27,7 @@ int solve_linear(quadratic_coeffs *coeffs, quadratic_roots *roots)
         else
         {
             roots->x1 = (-coeffs->c / coeffs->b);
+            roots->x2 = NAN;
             return 1;
         }
     }

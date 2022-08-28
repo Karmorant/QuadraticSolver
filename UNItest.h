@@ -6,7 +6,7 @@ struct UNItests_t
     int      uni_n_roots;
     double            x1;
     double            x2;
-    double  uni_coefs[5];
+    double  uni_coefs[3];
 };
 
 
