@@ -48,14 +48,6 @@ int main()
                 give_answers(solve_quadratic(&coeffs, &roots), &roots);
                 show_menu();
                 break;
-        case OPT_CAT:
-                //cat();  //create cat
-                break;
-        case OPT_UNITEST:
-                clear(buf);
-                UNItests(&coeffs, &roots);
-                show_menu();                
-                break;
         default:
                 break;
         }

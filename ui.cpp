@@ -33,12 +33,7 @@ int write_buf (char *buf)
             printf("OVERFLOW_ERROR. Please try again.\n");
             while ((c = getchar()) != EOF && c != '\n')
                 ;
-            //clear(buf);
-            //write_buf(buf);
-            //buf[i + 1] = '\n';
             return OVERFLOW_ERROR;
-            // while (wriete(buf) == OVERFLAW) 
-                //printf("overflaw")
         }
         else
         {
@@ -78,14 +73,6 @@ int check_command(char *buf)
     {
         return OPT_SOLVE;
     }
-    else if (compare(buf, unitest_f, MAXL))
-    {
-        return OPT_UNITEST;
-    }
-    else if (compare(buf, cat_f, MAXL))
-    {
-        return OPT_CAT;
-    }
     else
     {
         return INPUT_ERROR;
@@ -100,10 +87,9 @@ void show_help ()
     printf("\tquit     ----->  Close the program            \n"
            "\tmenu     ----->  Return to the Menu page      \n"
            "\thelp     ----->  Display help informatio      \n"
-           "\tsolve    ----->  Solves all your problems     \n"
+           "\tsolve    ----->  Solves quadratic equations   \n"
            "\tcat      ----->  MEOW                         \n"
            "\tunitest  -----> Show results of UNItest       \n");
 
 }
-
 
