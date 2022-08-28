@@ -28,7 +28,6 @@ int write_buf (char *buf)
     clear(buf);
     for (int i = 0; (c = getchar()) != EOF && c != '\n'; i++)
     {
-        printf("Again\n");
         if (i >= MAXL - 1)
         {
             printf("OVERFLOW_ERROR. Please try again.\n");
@@ -44,7 +43,6 @@ int write_buf (char *buf)
         else
         {
             buf[i] = (char) c;
-            printf("%s", buf);
         }
     }
     return 1;
