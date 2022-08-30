@@ -1,3 +1,6 @@
+/**
+ *      \brief Сontains data output control function
+ */
 #include <stdio.h>
 
 #include "output.h"

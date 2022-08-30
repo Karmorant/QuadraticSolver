@@ -1,33 +1,26 @@
+/**
+ * 
+ * \brief Сontains user interface interaction functions
+ * 
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <ctype.h>
 
 #include "UI_functions.h"
-
-
-void clear_buf(char *buf)
-{
-    for (int i = 0; i < MAXL; i++)
-    { 
-        buf[i] = '\0';
-    }
-} 
-
-void show_menu()
-{
-    printf("\t\t------Menu-----\n"
-           "\tTo get command list enter: help\n");
-    
-}
-
-
 
 int write_buf (char *buf)
 {
     int c = 0;
     clear_buf(buf);
-    for (int i = 0; (c = getchar()) != EOF && c != '\n'; i++)
+    do
+    {
+            buf[0] = getchar();
+    } while (isspace(buf[0]));
+
+    for (int i = 1; (c = getchar()) != EOF && c != '\n'; i++)
     {
         if (i >= MAXL - 1)
         {
@@ -69,6 +62,22 @@ int check_command(char *buf)
     }
 }
 
+
+void clear_buf(char *buf)
+{
+    for (int i = 0; i < MAXL; i++)
+    { 
+        buf[i] = '\0';
+    }
+} 
+
+
+void show_menu()
+{
+    printf("\t\t------Menu-----\n"
+           "\tTo get command list enter: help\n");
+    
+}
 
 
 void show_help ()
