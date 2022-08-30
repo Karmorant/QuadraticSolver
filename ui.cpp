@@ -6,11 +6,10 @@
 #include "UI_functions.h"
 
 
-
-void clear(char *buf)
+void clear_buf(char *buf)
 {
     for (int i = 0; i < MAXL; i++)
-    {
+    { 
         buf[i] = '\0';
     }
 } 
@@ -21,18 +20,19 @@ void show_menu()
            "\tTo get command list enter: help\n");
     
 }
- 
+
+
+
 int write_buf (char *buf)
 {
-    int  c = 0;
-    clear(buf);
+    int c = 0;
+    clear_buf(buf);
     for (int i = 0; (c = getchar()) != EOF && c != '\n'; i++)
     {
         if (i >= MAXL - 1)
         {
             printf("OVERFLOW_ERROR. Please try again.\n");
-            while ((c = getchar()) != EOF && c != '\n')
-                ;
+            while ((c = getchar()) != EOF && c != '\n') {};
             return OVERFLOW_ERROR;
         }
         else
@@ -43,33 +43,23 @@ int write_buf (char *buf)
     return 1;
 }
 
-int compare(char *str1, const char *str2, const int size)
-{
-    if (!strncmp(str1, str2, size))         // tolower?
-    {
-        return true;
-    }
-    else 
-    {
-        return false;
-    }
-}
 
 int check_command(char *buf)
 {
-    if (compare(buf, quit_f, MAXL))
+
+    if (strncmp(buf, quit_f, MAXL) == 0) 
     {
         return OPT_QUIT;
     }
-    else if (compare(buf, menu_f, MAXL))
+    else if (strncmp(buf, menu_f, MAXL) == 0)
     {
         return OPT_MENU;
     }
-    else if (compare(buf, help_f, MAXL))
+    else if (strncmp(buf, help_f, MAXL) == 0)
     {
         return OPT_HELP;
     }
-    else if (compare(buf, solve_f, MAXL))
+    else if (strncmp(buf, solve_f, MAXL) == 0)
     {
         return OPT_SOLVE;
     }
@@ -87,9 +77,7 @@ void show_help ()
     printf("\tquit     ----->  Close the program            \n"
            "\tmenu     ----->  Return to the Menu page      \n"
            "\thelp     ----->  Display help informatio      \n"
-           "\tsolve    ----->  Solves quadratic equations   \n"
-           "\tcat      ----->  MEOW                         \n"
-           "\tunitest  -----> Show results of UNItest       \n");
+           "\tsolve    ----->  Solves quadratic equations   \n");
 
 }
 

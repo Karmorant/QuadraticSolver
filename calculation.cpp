@@ -2,7 +2,7 @@
 #include <math.h>
 
 #include "compare.h"
-#include "quadratic_functions.h"
+#include "calculation.h"
 
 
 int solve_linear(quadratic_coeffs *coeffs, quadratic_roots *roots)
@@ -22,7 +22,8 @@ int solve_linear(quadratic_coeffs *coeffs, quadratic_roots *roots)
     {
         if (is_equal(coeffs->c, 0))
         {
-            return INF_ROOTS;
+            roots->x1 = 0;
+            return 1;
         }
         else
         {
@@ -35,7 +36,7 @@ int solve_linear(quadratic_coeffs *coeffs, quadratic_roots *roots)
 
 int solve_quadratic(quadratic_coeffs *coeffs, quadratic_roots *roots) 
 {
-    if (is_equal(coeffs->a, 0))
+    if (is_equal(coeffs->a, 0)) 
     {
          return solve_linear(coeffs, roots);
     }

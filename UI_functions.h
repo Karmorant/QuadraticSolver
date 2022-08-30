@@ -10,14 +10,14 @@ static const char menu_f[]  =      "menu";
 static const char help_f[]  =      "help";
 static const char solve_f[] =     "solve";
 
-static const int MAXL = 20;
-
+static const int MAXL = 10;
 
 
 enum errors
 {
     INPUT_ERROR    = -2,
     OVERFLOW_ERROR = -3,
+    MATCH_ERROR    = -4,
 
 };
 
@@ -31,10 +31,9 @@ enum operations
 };
 
 
-void clear(char *buf);
+void clear_buf(char *buf);
 void show_menu();
-int write_buf (char *buf);
-int  compare(char *str1, const char *str2, const int size);
+int  write_buf (char *buf);
 int  check_command(char *buf);
 void show_help();
 

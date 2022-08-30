@@ -1,40 +1,50 @@
+/**
+ * \brief Main.cpp -    main file of projekt
+ *  
+ * Performs initialization and control of the interface,
+ * using the following commands:
+ * 
+ * quit     ----->  Close the program            
+ * menu     ----->  Return to the Menu page      
+ * help     ----->  Display help informatio     
+ * solve    ----->  Solves quadratic equations
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include "UI_functions.h"
-#include "quadratic_functions.h"
+#include "calculation.h"
 #include "input.h"
 #include "output.h"
 #include "compare.h"
 #include "UNItest.h"
+#include <assert.h>
 
-char buf[MAXL] = {0};
 
 int main()
 {
-
+    char buf[MAXL] = {0};
     quadratic_coeffs coeffs = {};
-    quadratic_roots   roots = {};
-
-    
+    quadratic_roots   roots = {};  
 
     int status = OPT_MENU;
 
-    show_menu(); 
+    show_menu();
     while (status != OPT_QUIT)
     {
-        clear(buf);
-        while(write_buf (buf) == OVERFLOW_ERROR)
-                ;
+        clear_buf(buf);
+        //the next while loop keeps the program
+        //from running until the input exceeds the buffer capacity
+        while(write_buf (buf) == OVERFLOW_ERROR) {};
         switch (check_command(buf))
         {
         case INPUT_ERROR:
                 printf("Incorrect input. Try again.\n");
                 break;
         case OPT_QUIT:
-                status = OPT_QUIT;
-                printf("Have a nice day.\n");
+                printf("Termination of work.\n");
+                return status = OPT_QUIT; 
                 break;
         case OPT_MENU:
                 show_menu();
@@ -43,12 +53,12 @@ int main()
                 show_help();
                 break;
         case OPT_SOLVE:
-                clear(buf);
                 read_coeffs(&coeffs, buf);
-                give_answers(solve_quadratic(&coeffs, &roots), &roots);
+                print_answers(solve_quadratic(&coeffs, &roots), &roots);
                 show_menu();
                 break;
         default:
+                return MATCH_ERROR;
                 break;
         }
     }
@@ -56,9 +66,3 @@ int main()
     return 0;
 }
 
-// Unit tests 
-// 1. Unit tests через код: 0 0 0 theshold хитрые
-// ****2. Unit tests через файл -2.3 2 3
-
-// Doxygen --> ваша
-// Readme.md: markdown

@@ -4,14 +4,14 @@
 #include "compare.h"
 
 
-int is_equal(const double a, const double d, const double threshold)
+int is_equal(const double a, const double d, const double epsilon)
 {  
-    return fabs(a - d) <= threshold;
+    return fabs(a - d) <= epsilon;
 } 
 
-int is_greater(const double a, const double d, const double threshold)
+int is_greater(const double a, const double d, const double epsilon)
 {  
-    if (is_equal(a, d, threshold))
+    if (is_equal(a, d, epsilon))
     {
         return false;
     }

@@ -3,11 +3,11 @@
 
 struct UNItests_t
 {
-    int      uni_n_roots;
-    double            x1;
-    double            x2;
-    double  uni_coefs[3];
-};
+    double     test_coefs[3];
+    int     expected_n_roots;
+    double                x1;
+    double                x2;
+}; 
 
 
 

@@ -1,7 +1,8 @@
 #ifndef INPUT_H
 #define INPUT_H
 #include <stdio.h>
-#include "quadratic_functions.h"
+
+#include "calculation.h"
 
 
 
